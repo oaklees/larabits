@@ -1,0 +1,23 @@
+{
+    "name": "jivemonkey2000/larabits",
+    "type": "library",
+    "description": "A collection of useful Laravel bits.",
+    "keywords": ["laravel"],
+    "homepage": "https://github.com/jivemonkey2000/larabits",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew Lees",
+            "email": "mralees@me.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "laravel/framework": "5.3.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Larabits\\": "src"
+        }
+    }
+}

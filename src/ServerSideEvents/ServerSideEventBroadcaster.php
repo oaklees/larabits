@@ -8,6 +8,13 @@ use Illuminate\Contracts\Broadcasting\Broadcaster as BroadcastContract;
 
 class ServerSideEventBroadcaster extends Broadcaster implements BroadcastContract
 {
+    /**
+     * The application instance.
+     *
+     * @var \Illuminate\Container\Container
+     */
+    protected $app;
+
 	/**
 	 * Poll frequency (microseconds) at which to query event existence.
      *
@@ -39,13 +46,13 @@ class ServerSideEventBroadcaster extends Broadcaster implements BroadcastContrac
     /**
      * Set configuration and initialise the event store.
      *
-     * @param $config
-     * @param \App\ServerSideEvents\EventStore $store
+     * @param \Illuminate\Container\Container $app
      */
-	public function __construct($config, EventStore $store)
+	public function __construct($app)
     {
-        $this->poll   = $config['poll'] * 1000000;
-        $this->events = $store;
+        $this->app    = $app;
+        $this->poll   = $this->app["config"]["broadcasting.connections.database"]['poll'] * 1000000;
+        $this->events = $this->app[EventStore::class];
     }
 
 	/**
@@ -68,7 +75,7 @@ class ServerSideEventBroadcaster extends Broadcaster implements BroadcastContrac
 	{
 		$attributes = $attributes ?: ['middleware' => ['web']];
 
-		app('router')->group($attributes, function ($router) {
+		$this->app->make('router')->group($attributes, function ($router) {
 			$router->get('/broadcasts/{channel}', 'App\ServerSideEvents\BroadcastController@listen');
 		});
 	}

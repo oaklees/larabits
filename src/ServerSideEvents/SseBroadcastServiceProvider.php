@@ -3,7 +3,6 @@
 namespace Larabits\ServerSideEvents;
 
 use Illuminate\Broadcasting\BroadcastManager;
-use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\ServiceProvider;
 
 class SseBroadcastServiceProvider extends ServiceProvider
@@ -25,8 +24,7 @@ class SseBroadcastServiceProvider extends ServiceProvider
 
         // Register the event broadcaster prior to extending the Broadcast Manager.
     	$this->app->singleton(ServerSideEventBroadcaster::class, function($app){
-	        $config = $app["config"]["broadcasting.connections.database"];
-            return new ServerSideEventBroadcaster($config,$app[EventStore::class]);
+            return new ServerSideEventBroadcaster($app);
 	    });
 
     	// Extend the Broadcast Manager with a 'database' implementation. Return
@@ -36,6 +34,6 @@ class SseBroadcastServiceProvider extends ServiceProvider
         });
 
         // Define the routes in the application.
-	    Broadcast::connection()->routes();
+        $broadcastManager->connection()->routes();
     }
 }

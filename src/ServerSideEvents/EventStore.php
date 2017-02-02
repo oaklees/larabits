@@ -24,14 +24,13 @@ class EventStore
     /**
      * Source of our broadcast events.
      *
-     * @var \App\ServerSideEvents\EventSource $source
+     * @var EventSource $source
      */
     protected $source;
 
     /**
      * Initialise sentEvents collection and the source of our events.
-     *
-     * @param \App\ServerSideEvents\EventSource $source
+     * @param EventSource $source
      */
     public function __construct(EventSource $source)
     {

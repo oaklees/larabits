@@ -1,8 +1,7 @@
 # Larabits
 A place for helpful collection of Laravel bits and bobs to reside.
 
-##Eloquent
-###AttributeEncryption
+## Eloquent - AttributeEncryption
 
 Add attribute level encryption to your Eloquent models in just a few steps:
 - Import `Larabits\Eloquent\AttributeEncryption` at the top of your class
@@ -40,3 +39,24 @@ If required, encryption can be enabled and disabled by using your `.env` file to
 To install Larabits, either add it your `composer.json` or do a `composer require jivemonkey2000/larabits` from your project root.
 ```
 composer require jivemonkey2000/larabits
+```
+### Broadcasts - ServerSideEvents
+Allow your application to broadcast events directly to clients using the JavaScript `EventSource` API and the HTTP `event-stream`.
+```javascript
+// Instantiate the EventSource to listen on channel, e.g. 'default' 
+var events = new EventSource('/broadcasts/default');
+
+// Add listener for your specific Laravel events
+events.addEventListener("App\\Events\\PostCreatedEvent", function(event) {
+    
+    // Access the event's payload, i.e. the public properties 
+    // of the event class being broadcast.
+    var payload = JSON.parse(event.data);
+    var user = payload.user;
+    var post = payload.post;
+    
+    // Use the broadcast data to drive your front end.
+    console.log(user.id + " just created a new post titled " + post.title);
+});
+```
+

@@ -31,16 +31,10 @@ class User extends Model
   
 }
 ```
-
 If required, encryption can be enabled and disabled by using your `.env` file to set an `APP_ENABLE_ENCRYPTION` constant `false`. This is sometimes useful for testing, for example when using `seeInDatabase('table',['foo' => 'bar']);`.
 
-## Installing
+## Broadcasts - ServerSideEvents
 
-To install Larabits, either add it your `composer.json` or do a `composer require jivemonkey2000/larabits` from your project root.
-```
-composer require jivemonkey2000/larabits
-```
-### Broadcasts - ServerSideEvents
 Allow your application to broadcast events directly to clients using the JavaScript `EventSource` API and the HTTP `event-stream`.
 ```javascript
 // Instantiate the EventSource to listen on channel, e.g. 'default' 
@@ -60,3 +54,9 @@ events.addEventListener("App\\Events\\PostCreatedEvent", function(event) {
 });
 ```
 
+## Installing
+
+To install Larabits, either add it your `composer.json` or do a `composer require jivemonkey2000/larabits` from your project root.
+```
+composer require jivemonkey2000/larabits
+```

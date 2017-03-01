@@ -12,7 +12,8 @@ trait AttributeEncryption
 	 */
 	public function getAttribute($attribute)
 	{
-		if ($this->shouldEncrypt($attribute)) {
+        if ($this->shouldEncrypt($attribute)
+            && !empty($this->attributes[$attribute])) {
 			// As this attribute is encrypted, return decrypted version
 			return decrypt($this->getAttributeValue($attribute));
 		} else {

@@ -1,8 +1,8 @@
 # Larabits
 A place for helpful collection of Laravel bits and bobs to reside.
 
-##Eloquent
-###AttributeEncryption
+## Eloquent 
+### Attribute Encryption
 
 Add attribute level encryption to your Eloquent models in just a few steps:
 - Import `Larabits\Eloquent\AttributeEncryption` at the top of your class
